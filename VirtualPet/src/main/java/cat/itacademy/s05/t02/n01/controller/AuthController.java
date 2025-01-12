@@ -1,5 +1,9 @@
-package cat.itacademy.s05.t02.n01.auth;
+package cat.itacademy.s05.t02.n01.controller;
 
+import cat.itacademy.s05.t02.n01.auth.AuthResponse;
+import cat.itacademy.s05.t02.n01.auth.LoginRequest;
+import cat.itacademy.s05.t02.n01.auth.RegisterRequest;
+import cat.itacademy.s05.t02.n01.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +18,12 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping(value = "login")
+    @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request)) ;
     }
 
-    @PostMapping(value = "register")
+    @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }

@@ -1,5 +1,8 @@
-package cat.itacademy.s05.t02.n01.auth;
+package cat.itacademy.s05.t02.n01.service;
 
+import cat.itacademy.s05.t02.n01.auth.AuthResponse;
+import cat.itacademy.s05.t02.n01.auth.LoginRequest;
+import cat.itacademy.s05.t02.n01.auth.RegisterRequest;
 import cat.itacademy.s05.t02.n01.enums.Role;
 import cat.itacademy.s05.t02.n01.jwt.JwtService;
 import cat.itacademy.s05.t02.n01.model.User;
