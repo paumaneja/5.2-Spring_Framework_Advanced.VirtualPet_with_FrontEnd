@@ -1,5 +1,8 @@
 package cat.itacademy.s05.t02.n01.model;
 
+
+import cat.itacademy.s05.t02.n01.enums.Mood;
+import cat.itacademy.s05.t02.n01.enums.PetType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,19 +21,51 @@ public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private int id;
     private String name;
-
-    private String type;
-
-    private String mood;
-
+    @Enumerated(EnumType.STRING)
+    private PetType type;
+    @Enumerated(EnumType.STRING)
+    private Mood mood;
     private int energy;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
+
+    private String weapon;
+
+
+    public void play() {
+        this.energy = Math.max(this.energy - 10, 0);
+        if (this.energy <= 40) {
+            this.mood = Mood.ANGRY;
+            if (this.energy <= 10) {
+                this.mood = Mood.TIRED;
+            }
+        }
+    }
+
+    public void feed() {
+        this.energy = Math.min(this.energy + 5, 100);
+        if (this.energy > 60) {
+            this.mood = Mood.HAPPY;
+        }
+    }
+
+    public void sleep() {
+        if (this.mood == Mood.TIRED) {
+            this.energy = 100;
+            this.mood = Mood.SAD;
+        } else {
+            throw new IllegalStateException("Pet is not tired and cannot sleep.");
+        }
+    }
+
+    public void changeWeapon(String newWeapon) {
+        this.weapon = newWeapon;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -40,8 +75,8 @@ public class Pet {
         return energy == pet.energy &&
                 Objects.equals(id, pet.id) &&
                 Objects.equals(name, pet.name) &&
-                Objects.equals(type, pet.type) &&
-                Objects.equals(mood, pet.mood) &&
+                type == pet.type &&
+                mood == pet.mood &&
                 Objects.equals(owner, pet.owner);
     }
 

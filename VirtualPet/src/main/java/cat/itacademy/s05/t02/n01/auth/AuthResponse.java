@@ -9,4 +9,5 @@ import lombok.*;
 public class AuthResponse {
     @NonNull
     String token;
+    Long userId;
 }
