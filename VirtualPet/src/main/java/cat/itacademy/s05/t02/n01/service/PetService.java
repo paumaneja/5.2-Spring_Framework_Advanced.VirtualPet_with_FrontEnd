@@ -2,9 +2,10 @@ package cat.itacademy.s05.t02.n01.service;
 
 import cat.itacademy.s05.t02.n01.dto.PetCreationDTO;
 import cat.itacademy.s05.t02.n01.enums.Mood;
-import cat.itacademy.s05.t02.n01.enums.PetType;
 import cat.itacademy.s05.t02.n01.model.Pet;
+import cat.itacademy.s05.t02.n01.model.User;
 import cat.itacademy.s05.t02.n01.repository.PetRepository;
+import cat.itacademy.s05.t02.n01.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,26 +18,46 @@ import java.util.Optional;
 public class PetService {
 
     private final PetRepository petRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PetService(PetRepository petRepository) {
+    public PetService(PetRepository petRepository, UserRepository userRepository) {
         this.petRepository = petRepository;
+        this.userRepository = userRepository;
     }
 
     public Pet createPet(PetCreationDTO petCreationDTO) {
-        log.debug("Creating pet with name: {} and type: {}", petCreationDTO.getName(), petCreationDTO.getType());
+        log.debug("Creating pet with name: {} and type: {} and ownerId: {}", petCreationDTO.getName(), petCreationDTO.getType(), petCreationDTO.getOwnerId());
+
+        // Buscar l'usuari (propietari) per l'ID
+        User owner = userRepository.findById(petCreationDTO.getOwnerId())
+                .orElseThrow(() -> new RuntimeException("Owner not found for ID: " + petCreationDTO.getOwnerId()));
+
+        log.debug("Owner found: {}", owner.getId());
+
+        // Crear la mascota amb l'owner assignat
         Pet pet = Pet.builder()
                 .name(petCreationDTO.getName())
                 .type(petCreationDTO.getType())
                 .mood(Mood.HAPPY) // Default mood
                 .energy(100) // Default energy
                 .weapon(null) // No weapon assigned by default
+                .owner(owner) // Assignar l'owner
                 .build();
-        return petRepository.save(pet);
+
+        Pet savedPet = petRepository.save(pet);
+        log.debug("Pet saved with ID: {}, Owner ID: {}", savedPet.getId(), savedPet.getOwner() != null ? savedPet.getOwner().getId() : null);
+
+        return savedPet;
     }
+
 
     public List<Pet> getPetsByOwnerId(Long ownerId) {
         return petRepository.findByOwnerId(ownerId);
+    }
+
+    public List<Pet> getAllPets() {
+        return petRepository.findAll();
     }
 
     public Optional<Pet> getPetById(Long petId) {
@@ -64,7 +85,7 @@ public class PetService {
 
     public Pet handleAction(Long petId, String action, String newWeapon) {
         return petRepository.findById(petId).map(pet -> {
-            switch (action.toLowerCase()) {
+            switch (action) {
                 case "play":
                     pet.play();
                     break;

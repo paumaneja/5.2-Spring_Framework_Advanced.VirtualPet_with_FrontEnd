@@ -51,6 +51,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
+        log.debug("Usuari autenticat: {}, Rols: {}", username, authorities);
+
         filterChain.doFilter(request, response);
     }
 

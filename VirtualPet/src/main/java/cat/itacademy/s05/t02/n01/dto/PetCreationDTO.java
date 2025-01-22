@@ -9,4 +9,5 @@ import lombok.Data;
 public class PetCreationDTO {
     private String name;
     private PetType type;
+    private Long ownerId;
 }

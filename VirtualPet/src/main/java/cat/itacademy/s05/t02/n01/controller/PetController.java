@@ -56,6 +56,26 @@ public class PetController {
         return ResponseEntity.ok(pets);
     }
 
+    @GetMapping("/getAllPets")
+    public ResponseEntity<List<PetDTO>> getAllPets() {
+        log.debug("Rebuda sol·licitud GET /getAllPets");
+        List<PetDTO> pets = petService.getAllPets().stream()
+                .map(pet -> PetDTO.builder()
+                        .id(pet.getId())
+                        .name(pet.getName())
+                        .type(pet.getType())
+                        .mood(pet.getMood())
+                        .energy(pet.getEnergy())
+                        .weapon(pet.getWeapon())
+                        .ownerId(pet.getOwner() != null ? pet.getOwner().getId() : null)
+                        .build())
+                .collect(Collectors.toList());
+
+        // Afegir un log per veure el contingut
+        log.debug("Mascotes retornades pel controlador: {}", pets);
+
+        return ResponseEntity.ok(pets);
+    }
 
     @GetMapping("/getPet/{id}")
     public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
