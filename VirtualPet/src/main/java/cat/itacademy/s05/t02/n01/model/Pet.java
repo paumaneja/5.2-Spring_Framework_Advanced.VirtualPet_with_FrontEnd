@@ -1,6 +1,5 @@
 package cat.itacademy.s05.t02.n01.model;
 
-
 import cat.itacademy.s05.t02.n01.enums.Mood;
 import cat.itacademy.s05.t02.n01.enums.PetType;
 import jakarta.persistence.*;
@@ -8,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Objects;
 
 @Data
@@ -65,7 +63,6 @@ public class Pet {
     public void changeWeapon(String newWeapon) {
         this.weapon = newWeapon;
     }
-
 
     @Override
     public boolean equals(Object o) {

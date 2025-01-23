@@ -9,12 +9,10 @@ import cat.itacademy.s05.t02.n01.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class PetService {
 
     private final PetRepository petRepository;
@@ -27,30 +25,21 @@ public class PetService {
     }
 
     public Pet createPet(PetCreationDTO petCreationDTO) {
-        log.debug("Creating pet with name: {} and type: {} and ownerId: {}", petCreationDTO.getName(), petCreationDTO.getType(), petCreationDTO.getOwnerId());
 
-        // Buscar l'usuari (propietari) per l'ID
         User owner = userRepository.findById(petCreationDTO.getOwnerId())
                 .orElseThrow(() -> new RuntimeException("Owner not found for ID: " + petCreationDTO.getOwnerId()));
 
-        log.debug("Owner found: {}", owner.getId());
-
-        // Crear la mascota amb l'owner assignat
         Pet pet = Pet.builder()
                 .name(petCreationDTO.getName())
                 .type(petCreationDTO.getType())
-                .mood(Mood.HAPPY) // Default mood
-                .energy(100) // Default energy
-                .weapon(null) // No weapon assigned by default
-                .owner(owner) // Assignar l'owner
+                .mood(Mood.HAPPY)
+                .energy(100)
+                .weapon(null)
+                .owner(owner)
                 .build();
 
-        Pet savedPet = petRepository.save(pet);
-        log.debug("Pet saved with ID: {}, Owner ID: {}", savedPet.getId(), savedPet.getOwner() != null ? savedPet.getOwner().getId() : null);
-
-        return savedPet;
+        return petRepository.save(pet);
     }
-
 
     public List<Pet> getPetsByOwnerId(Long ownerId) {
         return petRepository.findByOwnerId(ownerId);

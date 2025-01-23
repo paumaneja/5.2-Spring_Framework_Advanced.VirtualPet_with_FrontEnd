@@ -14,6 +14,6 @@ public class PetDTO {
     private Mood mood;
     private int energy;
     private String weapon;
-    private Long ownerId; // Retornem només l'ID del propietari
+    private Long ownerId;
 }
 

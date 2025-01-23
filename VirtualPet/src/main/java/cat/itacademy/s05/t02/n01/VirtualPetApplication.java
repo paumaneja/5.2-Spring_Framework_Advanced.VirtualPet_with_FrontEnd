@@ -9,7 +9,6 @@ public class VirtualPetApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(VirtualPetApplication.class, args);
-		//System.out.println("JWT_SECRET: " + System.getenv("JWT_SECRET"));
 
 	}
 

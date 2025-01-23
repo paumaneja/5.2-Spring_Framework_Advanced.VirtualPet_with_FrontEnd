@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pets")
-@Slf4j
 public class PetController {
 
     private final PetService petService;
@@ -24,7 +22,6 @@ public class PetController {
     public PetController(PetService petService) {
         this.petService = petService;
     }
-
 
     @PostMapping("/create")
     public ResponseEntity<PetDTO> createPet(@RequestBody PetCreationDTO petCreationDTO) {
@@ -39,7 +36,6 @@ public class PetController {
                 .build();
         return ResponseEntity.ok(petDTO);
     }
-
 
     @GetMapping("/getPetsByOwner")
     public ResponseEntity<List<PetDTO>> getPetsByOwnerId(@RequestParam Long ownerId) {
@@ -60,7 +56,6 @@ public class PetController {
     @GetMapping("/getAllPets")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<PetDTO>> getAllPets() {
-        log.debug("Rebuda sol·licitud GET /getAllPets");
         List<PetDTO> pets = petService.getAllPets().stream()
                 .map(pet -> PetDTO.builder()
                         .id(pet.getId())
@@ -73,9 +68,6 @@ public class PetController {
                         .build())
                 .collect(Collectors.toList());
 
-        // Afegir un log per veure el contingut
-        log.debug("Mascotes retornades pel controlador: {}", pets);
-
         return ResponseEntity.ok(pets);
     }
 
@@ -86,7 +78,6 @@ public class PetController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestParam String action, @RequestParam(required = false) String newWeapon) {
         try {
@@ -96,8 +87,6 @@ public class PetController {
             return ResponseEntity.badRequest().build();
         }
     }
-
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePet(@PathVariable Long id) {
