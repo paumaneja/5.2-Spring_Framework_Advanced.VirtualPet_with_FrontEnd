@@ -7,6 +7,7 @@ import cat.itacademy.s05.t02.n01.service.PetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,6 +58,7 @@ public class PetController {
     }
 
     @GetMapping("/getAllPets")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<PetDTO>> getAllPets() {
         log.debug("Rebuda sol·licitud GET /getAllPets");
         List<PetDTO> pets = petService.getAllPets().stream()

@@ -5,16 +5,21 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class JwtService {
 
@@ -22,7 +27,22 @@ public class JwtService {
     private String SECRET_KEY;
 
     public String getToken(UserDetails user){
-        return getToken(new HashMap<>(), user);
+        /*
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("roles", user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
+        */
+        Map<String, Object> extraClaims = new HashMap<>();
+        List<String> roles = user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        extraClaims.put("roles", roles);
+
+        // Afegir un log per depuració
+        log.info("Roles generats per al token: {}", roles);
+
+        return getToken(extraClaims, user);
     }
 
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
