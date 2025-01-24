@@ -35,10 +35,10 @@ public class Pet {
 
 
     public void play() {
-        this.energy = Math.max(this.energy - 10, 0);
-        if (this.energy <= 40) {
+        this.energy = Math.max(this.energy - 15, 0);
+        if (this.energy <= 60) {
             this.mood = Mood.ANGRY;
-            if (this.energy <= 10) {
+            if (this.energy <= 20) {
                 this.mood = Mood.TIRED;
             }
         }
@@ -53,7 +53,7 @@ public class Pet {
 
     public void sleep() {
         if (this.mood == Mood.TIRED) {
-            this.energy = 100;
+            this.energy = 80;
             this.mood = Mood.SAD;
         } else {
             throw new IllegalStateException("Pet is not tired and cannot sleep.");
