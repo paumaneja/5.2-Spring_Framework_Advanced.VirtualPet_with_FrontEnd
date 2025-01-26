@@ -67,7 +67,6 @@ public class PetController {
                         .ownerId(pet.getOwner() != null ? pet.getOwner().getId() : null)
                         .build())
                 .collect(Collectors.toList());
-
         return ResponseEntity.ok(pets);
     }
 
@@ -80,22 +79,13 @@ public class PetController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestParam String action, @RequestParam(required = false) String newWeapon) {
-        try {
-            Pet updatedPet = petService.handleAction(id, action, newWeapon);
-            return ResponseEntity.ok(updatedPet);
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        Pet updatedPet = petService.handleAction(id, action, newWeapon);
+        return ResponseEntity.ok(updatedPet);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePet(@PathVariable Long id) {
-        try {
-            petService.deletePet(id);
-            return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+        petService.deletePet(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
