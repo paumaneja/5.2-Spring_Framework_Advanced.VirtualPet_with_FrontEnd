@@ -29,7 +29,7 @@ VirtualPet és una aplicació web que permet gestionar i jugar amb mascotes virt
 
 2. **Configura la base de dades:**
 
-   - Crea una base de dades a MySQL anomenada `virtualpe`tdb.
+   - Crea una base de dades a MySQL anomenada `virtualpetdb`.
    - Actualitza el fitxer `src/main/resources/application.properties` amb les teves credencials de MySQL:
      ```properties
      spring.datasource.url=jdbc:mysql://localhost:3306/virtualpet
