@@ -2,7 +2,7 @@
 
 ## Introduction
 
-VirtualPet is the final assignment of a bootcamp held at the IT Academy of Barcelona Activa. The goal of the project was to develop a full-stack application divided into two parts: a backend built with Spring Boot and a frontend created using an AI selected to meet the project's needs and characteristics. You can find the frontend repository [here](https://github.com/your_user/VirtualPetFrontend). The application combines technical knowledge and creativity to deliver an interactive experience.
+VirtualPet is the final assignment of a bootcamp held at the IT Academy of Barcelona Activa. The goal of the project was to develop a full-stack application divided into two parts: a backend built with Spring Boot and a frontend created using an AI selected to meet the project's needs and characteristics. You can find the frontend repository [here]([https://github.com/your_user/VirtualPetFrontend]). The application combines technical knowledge and creativity to deliver an interactive experience.
 
 ## Description
 
