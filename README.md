@@ -73,12 +73,12 @@ The backend ensures secure user management and provides robust APIs for seamless
 
 ### Pet Management
 
-- **POST /create: Crear una nova mascota.
-- **GET /getPetsByOwner: Obtenir totes les mascotes d'un propietari.
-- **GET /getAllPets: Obtenir totes les mascotes.
-- **GET /getPet/{id}: Obtenir els detalls d'una mascota específica.
-- **PUT /{id}: Actualitzar la informació d'una mascota.
-- **DELETE /{id}: Eliminar una mascota.
+- **POST /create:** Crear una nova mascota.
+- **GET /getPetsByOwner:** Obtenir totes les mascotes d'un propietari.
+- **GET /getAllPets:** Obtenir totes les mascotes.
+- **GET /getPet/{id}:** Obtenir els detalls d'una mascota específica.
+- **PUT /{id}:** Actualitzar la informació d'una mascota.
+- **DELETE /{id}:** Eliminar una mascota.
 
 ## Project Structure
 
