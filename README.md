@@ -34,7 +34,7 @@ The backend ensures secure user management and provides robust APIs for seamless
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your_user/VirtualPet.git
+   git clone https://github.com/paumaneja/5.2-Spring_Framework_Advanced.VirtualPet_with_FrontEnd.git
    cd VirtualPet
    ```
 
