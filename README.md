@@ -1,102 +1,113 @@
 # VirtualPet Backend
 
-## Descripció
+## Introduction
 
-VirtualPet és una aplicació web que permet gestionar i jugar amb mascotes virtuals. Aquesta aplicació està dividida en un backend desenvolupat amb Spring Boot i un frontend que interactua amb ell. Aquest repositori conté el codi del backend, que inclou l'autenticació amb JWT, gestió de mascotes, i funcionalitats específiques com el canvi d'armes per a mascotes de tipus "StarWars" i "LordRings".
+VirtualPet is the final assignment of a bootcamp held at the IT Academy of Barcelona Activa. The goal of the project was to develop a full-stack application divided into two parts: a backend built with Spring Boot and a frontend created using an AI selected to meet the project's needs and characteristics. You can find the frontend repository [here](https://github.com/your_user/VirtualPetFrontend). The application combines technical knowledge and creativity to deliver an interactive experience.
 
-## Característiques Principals
+## Description
 
-- Autenticació i autorització amb JWT.
-- Gestió d'usuaris.
-- Creació, actualització, i eliminació de mascotes virtuals.
-- Canvi d'armes per a mascotes amb regles específiques segons el tipus de mascota.
-- Maneig d'excepcions global.
+VirtualPet is a web application that allows users to manage and play with virtual pets. The backend handles key functionalities such as JWT-based authentication, pet management, and specific features like weapon changes tailored to pets of "StarWars" and "LordRings" types. Users can perform a variety of actions, including:
 
-## Requisits
+- Registering and logging into their accounts.
+- Creating, updating, and deleting virtual pets.
+- Viewing and managing their pet's attributes.
+- Changing weapons for specific pets based on predefined rules.
 
-- Java 17 o superior
-- Maven 3.8.0 o superior
-- MySQL 8.0 o superior
+The backend ensures secure user management and provides robust APIs for seamless integration with the frontend.
 
-## Configuració i Instal·lació
+## Key Features
 
-1. **Clona el repositori:**
+- Authentication and authorization with JWT.
+- User management.
+- Creation, update, and deletion of virtual pets.
+- Weapon changes for pets with specific rules based on their type.
+- Global exception handling.
+
+## Requirements
+
+- Java 17 or higher
+- Maven 3.8.0 or higher
+- MySQL 8.0 or higher
+
+## Setup and Installation
+
+1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/el_teu_usuari/VirtualPet.git
+   git clone https://github.com/your_user/VirtualPet.git
    cd VirtualPet
    ```
 
-2. **Configura la base de dades:**
+2. **Configure the database:**
 
-   - Crea una base de dades a MySQL anomenada `virtualpetdb`.
-   - Actualitza el fitxer `src/main/resources/application.properties` amb les teves credencials de MySQL:
+   - Create a MySQL database named `virtualpetdb`.
+   - Update the `src/main/resources/application.properties` file with your MySQL credentials:
      ```properties
-     spring.datasource.url=jdbc:mysql://localhost:3306/virtualpet
-     spring.datasource.username=el_teu_usuari
-     spring.datasource.password=la_teva_contrasenya
+     spring.datasource.url=jdbc:mysql://localhost:3306/virtualpetdb
+     spring.datasource.username=your_user
+     spring.datasource.password=your_password
      spring.jpa.hibernate.ddl-auto=update
      ```
 
-3. **Construeix el projecte:**
+3. **Build the project:**
 
    ```bash
    mvn clean install
    ```
 
-4. **Executa l'aplicació:**
+4. **Run the application:**
 
    ```bash
    mvn spring-boot:run
    ```
 
-5. **Accedeix al backend:**
-   L'aplicació estarà disponible a `http://localhost:8080`.
+5. **Access the backend:**
+   The application will be available at `http://localhost:8080`.
 
-## Endpoints Principals
+## Main Endpoints
 
-### Autenticació
+### Authentication
 
-- **POST /auth/register:** Registra un nou usuari.
-- **POST /auth/login:** Inicia sessió i obté un token JWT.
+- **POST /auth/register:** Register a new user.
+- **POST /auth/login:** Log in and obtain a JWT token.
 
-### Gestió de Mascotes
+### Pet Management
 
-- **GET /pets:** Obté totes les mascotes de l'usuari actual.
-- **POST /pets:** Crea una nova mascota.
-- **PUT /pets/{id}:** Actualitza la informació d'una mascota.
-- **DELETE /pets/{id}:** Elimina una mascota.
-- **PATCH /pets/{id}/weapon:** Canvia l'arma d'una mascota (segons el tipus).
+- **GET /pets:** Retrieve all pets for the current user.
+- **POST /pets:** Create a new pet.
+- **PUT /pets/{id}:** Update pet information.
+- **DELETE /pets/{id}:** Delete a pet.
+- **PATCH /pets/{id}/weapon:** Change a pet's weapon (based on type).
 
-## Estructura del Projecte
+## Project Structure
 
-- `src/main/java`: Conté el codi font principal.
-  - `controller`: Gestiona les peticions HTTP.
-  - `service`: Implementa la lògica de negoci.
-  - `repository`: Interactua amb la base de dades.
-  - `model`: Conté les entitats.
-  - `config`: Configuracions de l'aplicació (seguretat, CORS, etc.).
-  - `auth`: Classes relacionades amb l'autenticació.
-  - `exception`: Maneig d'errors personalitzat.
-- `src/main/resources`: Inclou els fitxers de configuració.
+- `src/main/java`: Contains the main source code.
+  - `controller`: Handles HTTP requests.
+  - `service`: Implements business logic.
+  - `repository`: Interacts with the database.
+  - `model`: Contains the entities.
+  - `config`: Application configurations (security, CORS, etc.).
+  - `auth`: Authentication-related classes.
+  - `exception`: Custom error handling.
+- `src/main/resources`: Includes configuration files.
 
-## Proves
+## Testing
 
-Executa les proves unitàries:
+Run unit tests:
 
 ```bash
 mvn test
 ```
 
-## Contribucions
+## Contributions
 
-Si vols contribuir al projecte:
+If you want to contribute to the project:
 
-1. Fes un fork del repositori.
-2. Crea una branca per a la teva funcionalitat o correcció de bug.
-3. Fes un pull request amb una descripció detallada.
+1. Fork the repository.
+2. Create a branch for your feature or bug fix.
+3. Submit a pull request with a detailed description.
 
-## Llicència
+## License
 
-Aquest projecte està sota la llicència MIT. Consulta el fitxer `LICENSE` per a més informació.
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
